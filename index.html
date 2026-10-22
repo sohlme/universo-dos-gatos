@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>O Fascinante Universo dos Gatos · A Arte do Ronrom</title>
+<meta name="description" content="O Fascinante Universo dos Gatos · Um santuário sobre a sabedoria, anatomia, curiosidades e serenidade dos gatos. Descubra a ciência do ronrom e a arte de viver o presente.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Hanken+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+:root{
+  /* Paleta Editorial: Tons de Verde, Amarelo e Rosa */
+  --green-main: #2f6f36;        /* Verde folha / matcha rico */
+  --green-dark: #19381c;        /* Verde floresta profundo */
+  --green-darker: #102412;      /* Verde escuro musgo noite */
+  --green-light: #5fa855;       /* Verde broto / oliva claro */
+  --green-soft: #85c27c;        /* Verde menta suave */
+  --green-pale: #eaf5e8;        /* Fundo verde sutilíssimo */
+
+  /* Tons de Amarelo Solar e Dourado */
+  --yellow-main: #f0a500;       /* Amarelo dourado mel aquecido */
+  --yellow-sun: #ffbe0b;        /* Amarelo sol luminoso */
+  --yellow-amber: #d48200;      /* Âmbar mostarda elegante */
+  --yellow-bright: #ffca28;     /* Amarelo vivo de destaque */
+  --yellow-soft: #fff9db;       /* Amarelo creme manteiga */
+  --yellow-glow: rgba(255, 190, 11, 0.45);
+
+  /* Tons de Rosa Almofadinha e Sakura */
+  --pink-main: #f06292;         /* Rosa vibrante almofadinha */
+  --pink-soft: #f8bbd0;         /* Rosa pastel suave */
+  --pink-pale: #fff0f5;         /* Rosa bebê claro de fundo */
+  --pink-rose: #ff6584;         /* Rosa coral vivo */
+  --pink-accent: #ff85a2;       /* Rosa destaque acolhedor */
+  --pink-glow: rgba(255, 101, 132, 0.45);
+
+  --bone: #faf7ed;              /* Marfim quente com toque amanteigado */
+  --bone-2: #f2ebd1;            /* Bege palha claro */
+  --bone-3: #e6dcbe;
+  --stone: #cfc5a4;             /* Bege acinzentado neutro */
+  --stone-d: #968c6d;           /* Tom neutro quente */
+
+  --ink: #162014;               /* Grafite escuro esverdeado */
+  --ink-2: #32402f;             /* Musgo neutro escuro */
+  --ink-light: #586854;
+
+  /* Aliases para compatibilidade */
+  --jade: var(--green-main);
+  --jade-d: var(--green-dark);
+  --jade-l: var(--green-light);
+  --gold: var(--yellow-main);
+
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --pad: clamp(22px, 6vw, 96px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bone);-webkit-text-size-adjust:100%}
+body{background:transparent;color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* Fundo com névoa sutil e gradiente verde-amarelo-rosa */
+.page-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:var(--bone)}
+.page-bg .pi{position:absolute;left:0;right:0;top:-16%;height:132%;background:url("assets/mist-bg.jpg") center/cover;will-change:transform;opacity:0.35}
+.page-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg, rgba(250,247,237,.88) 0%, rgba(255,249,219,.72) 45%, rgba(255,240,245,.65) 75%, rgba(234,245,232,.88) 100%)}
+
+::selection{background:var(--pink-rose);color:#ffffff}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* Lenis scroll */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+.lenis.lenis-smooth iframe{pointer-events:none}
+
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:.005em}
+
+/* Marcadores elegantes de seção (sem emojis) */
+.eyebrow{font-size:.68rem;letter-spacing:.38em;text-transform:uppercase;color:var(--green-main);font-weight:600;display:inline-flex;align-items:center;gap:.6rem}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--yellow-sun);display:inline-block}
+.eyebrow.pink{color:var(--pink-rose)}
+.eyebrow.pink::before{background:var(--pink-rose)}
+.eyebrow.c{justify-content:center}
+
+/* ---------- Preloader ---------- */
+.loader{position:fixed;inset:0;z-index:120;background:var(--bone);display:grid;place-items:center;transition:opacity .9s ease}
+.loader.done{opacity:0;pointer-events:none}
+.lw{text-align:center}
+.lw .mk{font-family:var(--serif);font-size:2.2rem;letter-spacing:.35em;color:var(--green-dark);margin-bottom:1.2rem}
+.lw .mk b{color:var(--yellow-amber);font-weight:400}
+.lw .lsub-top{display:block;font-size:.78rem;letter-spacing:.35em;text-transform:uppercase;color:var(--stone-d);margin-bottom:1.6rem}
+.lbar{width:180px;height:3px;background:rgba(47,111,54,.18);margin:0 auto;overflow:hidden;border-radius:10px}
+.lbar i{display:block;height:100%;width:0;background:linear-gradient(90deg, var(--green-light), var(--yellow-sun), var(--pink-rose));transition:width .25s ease;border-radius:10px}
+.lsub{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--stone-d);margin-top:1.1rem}
+
+/* ---------- Nav (Sem Emojis) ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;
+padding:1.4rem var(--pad);transition:background .4s,padding .4s,box-shadow .4s,backdrop-filter .4s}
+nav.docked{background:rgba(250,247,237,.94);backdrop-filter:blur(14px);padding:.85rem var(--pad);box-shadow:0 2px 20px rgba(25,56,28,.08);border-bottom:1px solid rgba(47,111,54,.14)}
+
+.brand{font-family:var(--serif);font-size:1.5rem;letter-spacing:.32em;color:var(--yellow-soft);text-shadow:0 2px 14px rgba(16,36,18,.8);transition:color .4s;display:inline-flex;align-items:center;gap:.5rem}
+.brand b{color:var(--yellow-sun);font-weight:400}
+
+.nlinks{display:flex;gap:2rem;align-items:center}
+.nlinks a{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,249,219,.95);text-shadow:0 1px 10px rgba(16,36,18,.7);position:relative;transition:color .35s}
+.nlinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:linear-gradient(90deg, var(--yellow-sun), var(--pink-rose));transition:width .35s}
+.nlinks a:hover{color:#fff}
+.nlinks a:hover::after{width:100%}
+
+.nbtn{padding:.62rem 1.4rem;border:1.5px solid var(--pink-rose);border-radius:100px;background:linear-gradient(135deg, rgba(255,190,11,.15) 0%, rgba(255,101,132,.22) 100%);color:var(--yellow-soft);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;text-shadow:none;transition:all .35s;display:inline-flex;align-items:center;gap:.4rem}
+.nbtn:hover{background:linear-gradient(135deg, var(--yellow-sun) 0%, var(--pink-rose) 100%);color:#ffffff;box-shadow:0 0 20px var(--pink-glow);transform:translateY(-1px)}
+
+nav.docked .brand{color:var(--green-dark);text-shadow:none}
+nav.docked .brand b{color:var(--yellow-amber)}
+nav.docked .nlinks a{color:var(--ink-2);text-shadow:none}
+nav.docked .nlinks a::after{background:var(--pink-rose)}
+nav.docked .nlinks a:hover{color:var(--pink-rose)}
+nav.docked .nbtn{border-color:var(--pink-rose);color:#c2185b;background:var(--pink-pale)}
+nav.docked .nbtn:hover{background:linear-gradient(135deg, var(--yellow-sun), var(--pink-rose));color:#fff;border-color:transparent;box-shadow:0 4px 15px var(--pink-glow)}
+
+@media(max-width:860px){ .nlinks a:not(.nbtn){display:none} }
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+.hero .bg{position:absolute;inset:0;z-index:0}
+/* object-position a 14% garante que a carinha, orelhas e olhos do gatinho fiquem 100% visíveis */
+.hero .bg img{width:100%;height:106%;object-fit:cover;object-position:center 14%;will-change:transform}
+@media(max-width:768px){
+  .hero .bg img{object-position:center 10%;height:104%}
+}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(25,56,28,.32) 0%, rgba(25,56,28,.04) 20%, rgba(25,56,28,.28) 55%, rgba(16,36,18,.92) 100%)}
+
+#steam{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.75}
+.hero .inner{position:relative;z-index:2;padding:0 var(--pad) clamp(2.5rem,5.5vh,4.5rem);width:100%}
+
+/* Emblema Felino Vertical (Substituindo o kanji por arte felina com cauda estilizada) */
+.hero-feline-badge{
+  position:absolute;
+  right:var(--pad);
+  top:12vh;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:1.1rem;
+  pointer-events:none;
+}
+.hero-feline-badge .cat-flourish-svg{
+  filter:drop-shadow(0 4px 18px rgba(16,36,18,.6));
+}
+.hero-feline-badge .v-caption{
+  writing-mode:vertical-rl;
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+}
+.hero-feline-badge .v-word{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,4vw,3.2rem);
+  letter-spacing:.22em;
+  color:rgba(255,249,219,.92);
+  text-shadow:0 3px 25px rgba(16,36,18,.75);
+}
+.hero-feline-badge .v-sub{
+  font-size:.65rem;
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  color:var(--pink-rose);
+  font-weight:500;
+  text-shadow:0 2px 10px rgba(16,36,18,.6);
+}
+@media(max-width:720px){
+  .hero-feline-badge{
+    top:9vh;
+    right:1.2rem;
+    transform:scale(0.75);
+    transform-origin:top right;
+  }
+}
+
+.hero h1 .hl{display:block}
+.hero h1{font-family:var(--serif);font-weight:400;color:var(--bone);font-size:clamp(3.2rem,9.5vw,8.5rem);line-height:.95;letter-spacing:-.01em;text-shadow:0 3px 35px rgba(16,36,18,.5)}
+.hero h1 em{font-style:italic;background:linear-gradient(120deg, var(--yellow-sun) 20%, var(--pink-rose) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px rgba(255,190,11,.45))}
+
+.hero .sub{max-width:44ch;margin:1.6rem 0 2.2rem;color:rgba(255,249,219,.95);font-size:clamp(.98rem,1.25vw,1.15rem);text-shadow:0 2px 10px rgba(16,36,18,.85);line-height:1.7}
+.hero .cta{display:flex;gap:1.3rem;flex-wrap:wrap;align-items:center;margin-bottom:2.6rem;position:relative;z-index:3}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1.05rem 2.25rem;border-radius:999px;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;transition:all .35s cubic-bezier(0.2,0.8,0.2,1);cursor:pointer;line-height:1;border:2px solid transparent;text-decoration:none;position:relative}
+
+.btn.solid{background:linear-gradient(135deg, #ffb300 0%, #f57c00 52%, #ec407a 100%);color:#ffffff !important;border:2px solid rgba(255,255,255,.35);box-shadow:0 6px 24px rgba(245,124,0,.45), 0 2px 8px rgba(0,0,0,.25);text-shadow:0 1px 3px rgba(0,0,0,.35)}
+.btn.solid:hover{transform:translateY(-3px);box-shadow:0 12px 34px rgba(236,64,122,.6), 0 4px 12px rgba(0,0,0,.3);filter:brightness(1.08)}
+.btn.solid:active{transform:translateY(0)}
+
+.btn.ghost{background:rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:2px solid rgba(255,255,255,.85);color:#ffffff !important;box-shadow:0 6px 22px rgba(0,0,0,.32);text-shadow:0 1px 4px rgba(16,36,18,.95)}
+.btn.ghost:hover{background:rgba(255,255,255,.32);border-color:#ffffff;color:#ffffff !important;transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.45);filter:brightness(1.05)}
+.btn.ghost:active{transform:translateY(0)}
+
+.scrolln{display:inline-flex;align-items:center;gap:.8rem;color:rgba(255,249,219,.92);font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;margin-top:.4rem;position:relative;z-index:2}
+.scrolln .ln{width:48px;height:2px;background:rgba(255,249,219,.45);position:relative;overflow:hidden;border-radius:2px}
+.scrolln .ln::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg, var(--yellow-sun), var(--pink-rose));animation:run 2.4s ease-in-out infinite}
+@keyframes run{0%{transform:translateX(-100%)}100%{transform:translateX(280%)}}
+
+@media(max-width:640px){
+  .hero .cta{flex-direction:column;align-items:stretch;gap:.9rem;margin-bottom:2rem}
+  .hero .cta .btn{width:100%;justify-content:center}
+}
+
+/* ---------- Seções ---------- */
+section{position:relative}
+.wrap{padding:clamp(4.5rem,10vh,7.5rem) var(--pad)}
+.rv{opacity:0;transform:translateY(34px)}
+
+/* ---------- Manifesto ---------- */
+.manifesto{background:transparent;text-align:center}
+.manifesto .big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5.6vw,4.8rem);line-height:1.15;letter-spacing:-.01em;max-width:20ch;margin:1.8rem auto 0;color:var(--ink)}
+.manifesto .big em{font-style:italic;color:var(--green-main);text-shadow:0 2px 20px rgba(47,111,54,.15)}
+.manifesto .lead{max-width:50ch;margin:2rem auto 0;color:var(--ink-2);font-size:1.06rem;line-height:1.75}
+
+/* ---------- Split (Origem / Anatomia) ---------- */
+.split{display:grid;grid-template-columns:1.15fr 0.85fr;gap:clamp(2rem,4.5vw,5rem);align-items:center}
+.split.rev{grid-template-columns:0.85fr 1.15fr}
+.split.rev .media{order:2}
+.media{position:relative;overflow:hidden;border-radius:12px;box-shadow:0 20px 45px rgba(25,56,28,.14);border:2px solid rgba(255,190,11,.15)}
+.media img{width:100%;height:clamp(440px,72vh,740px);object-fit:cover;transition:transform .7s ease}
+.media:hover img{transform:scale(1.03)}
+.media .cap{position:absolute;left:1.2rem;bottom:1.2rem;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--yellow-soft);background:rgba(16,36,18,.75);backdrop-filter:blur(8px);padding:.5rem .9rem;border-radius:6px;border:1px solid rgba(255,181,197,.3)}
+
+.copy h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.5vw,3.8rem);line-height:1.08;margin:1.2rem 0;letter-spacing:-.01em}
+.copy h2 em{font-style:italic;color:var(--green-main)}
+.copy p{color:var(--ink-2);max-width:44ch;margin-bottom:1.1rem;font-size:.98rem;line-height:1.75}
+
+.copy .meta{display:flex;gap:2.6rem;margin-top:2.2rem;flex-wrap:wrap}
+.copy .meta .k{font-family:var(--serif);font-size:2.3rem;color:var(--yellow-amber);line-height:1;display:flex;align-items:baseline;gap:.2rem}
+.copy .meta .k.pink{color:var(--pink-rose)}
+.copy .meta .l{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone-d);margin-top:.45rem;font-weight:500}
+
+.microsteps{display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:1.2rem;margin-top:2.4rem}
+.microsteps > div{background:var(--bone-2);padding:1.1rem 1.2rem;border-radius:10px;border-left:3.5px solid var(--green-main);border-top:1px solid rgba(255,190,11,.15);transition:all .35s}
+.microsteps > div:hover{transform:translateY(-3px);border-left-color:var(--yellow-main);background:#fff;box-shadow:0 10px 25px rgba(25,56,28,.08)}
+.microsteps > div.pink-step{border-left-color:var(--pink-rose);background:#fff7f9}
+.microsteps > div.pink-step:hover{border-left-color:var(--pink-main);box-shadow:0 10px 25px rgba(240,98,146,.15)}
+.microsteps .n{font-size:.74rem;letter-spacing:.2em;color:var(--green-main);font-weight:600}
+.microsteps .n.pink{color:var(--pink-rose)}
+.microsteps .t{font-size:.84rem;color:var(--ink);margin-top:.4rem;line-height:1.5}
+
+@media(max-width:840px){
+  .split,.split.rev{grid-template-columns:1fr;gap:2.4rem}
+  .split.rev .media{order:0}
+  .media img{height:46vh}
+}
+
+/* ---------- Ritual Horizontal Scrub ---------- */
+.ritual{background:linear-gradient(175deg, var(--green-dark) 0%, #122815 100%);color:var(--bone);height:100vh;display:flex;flex-direction:column;overflow:hidden;border-top:2px solid rgba(255,190,11,.2);border-bottom:2px solid rgba(255,101,132,.2)}
+.ritual .head{padding:clamp(4.2rem,8vh,5.4rem) var(--pad) clamp(.7rem,1.8vh,1.3rem);max-width:none;text-align:center;flex:none}
+.ritual .head .eyebrow{color:var(--yellow-bright)}
+.ritual .head h2{font-family:var(--serif);font-size:clamp(2rem,4.2vw,3.4rem);margin-top:.6rem;color:#ffffff;line-height:1.05}
+
+.track-wrap{position:relative;flex:1;min-height:0;overflow:hidden}
+.track{display:flex;gap:clamp(1.5rem,3vw,3rem);height:100%;align-items:stretch;padding:0 var(--pad) clamp(1.4rem,3.5vh,2.6rem);will-change:transform}
+
+.step{flex:0 0 auto;width:min(72vw,430px);height:100%;position:relative;border-radius:12px;overflow:hidden;background:#1e3f22;border:1px solid rgba(255,190,11,.2);box-shadow:0 15px 40px rgba(0,0,0,.3)}
+.step.pink-border{border-color:rgba(255,101,132,.35)}
+.step img{width:100%;height:100%;object-fit:cover;opacity:.92;transition:transform .7s ease}
+.step:hover img{transform:scale(1.04)}
+
+.step .lab{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.9rem;background:linear-gradient(180deg,transparent 35%,rgba(16,36,18,.88) 85%)}
+.step .lab .s{font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;color:var(--yellow-bright);font-weight:600}
+.step .lab .s.pink{color:var(--pink-accent)}
+.step .lab h3{font-family:var(--serif);font-size:1.8rem;margin:.4rem 0 .3rem;color:#ffffff}
+.step .lab p{font-size:.86rem;color:rgba(255,249,219,.85);max-width:32ch;line-height:1.6}
+
+.step.intro{display:flex;flex-direction:column;justify-content:center;background:none;width:min(78vw,360px);border:none;box-shadow:none}
+.step.intro .big{font-family:var(--serif);font-size:clamp(2.1rem,4vw,3.2rem);color:#ffffff;line-height:1.15}
+.step.intro .big em{font-style:italic;color:var(--yellow-sun)}
+
+/* ---------- Personalidades / Cards ---------- */
+.range{background:transparent}
+.range .head{text-align:center;margin-bottom:3.5rem}
+.range .head h2{font-family:var(--serif);font-size:clamp(2.2rem,4.6vw,3.8rem);margin-top:1rem}
+.range .head h2 em{font-style:italic;color:var(--green-main)}
+
+.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;align-items:stretch}
+.grade{border:1.5px solid rgba(47,111,54,.15);border-radius:14px;overflow:hidden;background:#ffffff;display:flex;flex-direction:column;transition:all .45s;box-shadow:0 8px 30px rgba(25,56,28,.04)}
+.grade:hover{transform:translateY(-8px);box-shadow:0 24px 50px rgba(25,56,28,.12);border-color:var(--yellow-sun)}
+.grade.pink-card:hover{border-color:var(--pink-rose);box-shadow:0 24px 50px rgba(240,98,146,.16)}
+.grade .pic{height:250px;overflow:hidden;position:relative}
+.grade .pic img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.grade:hover .pic img{transform:scale(1.08)}
+
+.grade .body{padding:1.8rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+.grade .g{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;color:var(--green-main);font-weight:600}
+.grade .g.pink{color:var(--pink-rose)}
+.grade h3{font-family:var(--serif);font-size:1.75rem;color:var(--ink)}
+.grade p{font-size:.88rem;color:var(--ink-2);flex:1;line-height:1.65}
+.grade .row{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem;padding-top:1rem;border-top:1px solid rgba(47,111,54,.1)}
+.grade .price{font-family:var(--serif);font-size:1.35rem;color:var(--yellow-amber);font-weight:500}
+.grade .price.pink{color:var(--pink-rose)}
+.grade .add{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green-dark);background:var(--green-pale);border:1px solid var(--green-main);border-radius:100px;padding:.55rem 1.1rem;transition:all .35s;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:.3rem}
+.grade .add:hover{background:var(--yellow-sun);color:var(--ink);border-color:var(--yellow-sun);box-shadow:0 4px 15px var(--yellow-glow)}
+.grade .add.pink-btn{background:var(--pink-pale);border-color:var(--pink-rose);color:#ad1457}
+.grade .add.pink-btn:hover{background:linear-gradient(135deg, var(--yellow-sun), var(--pink-rose));color:#fff;border-color:transparent;box-shadow:0 4px 15px var(--pink-glow)}
+
+@media(max-width:860px){ .grades{grid-template-columns:1fr;max-width:440px;margin:0 auto} }
+
+/* ---------- Curiosidades / Numbers ---------- */
+.numbers{background:linear-gradient(135deg, var(--green-dark) 0%, #122815 100%);color:var(--bone);border-top:1px solid rgba(255,190,11,.2);border-bottom:1px solid rgba(255,101,132,.2)}
+.numgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.2rem;text-align:center}
+.numgrid .v{font-family:var(--serif);font-size:clamp(2.8rem,6.2vw,4.8rem);color:var(--yellow-sun);line-height:1;text-shadow:0 0 25px rgba(255,190,11,.3)}
+.numgrid .v.pink{color:var(--pink-rose);text-shadow:0 0 25px rgba(255,101,132,.4)}
+.numgrid .v.shimmer{background:linear-gradient(135deg, var(--yellow-sun), var(--pink-rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(255,101,132,.3))}
+.numgrid .v em{font-style:normal;color:var(--green-soft);font-size:.6em}
+.numgrid .v.pink em{color:var(--pink-soft)}
+.numgrid .l{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--yellow-soft);margin-top:.8rem;line-height:1.5}
+
+@media(max-width:780px){ .numgrid{grid-template-columns:1fr 1fr;gap:2.6rem 1.5rem} }
+
+/* ---------- Interlúdio ---------- */
+.interlude{position:relative;min-height:85vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.interlude .bg{position:absolute;inset:0;z-index:0}
+.interlude .bg img{position:absolute;left:0;top:-14%;width:100%;height:128%;object-fit:cover;will-change:transform}
+.interlude .bg::after{content:"";position:absolute;inset:0;background:rgba(16,36,18,.68)}
+.interlude .q{position:relative;z-index:1;padding:0 var(--pad)}
+.interlude .q .interlude-tag{font-size:.85rem;letter-spacing:.38em;text-transform:uppercase;color:var(--pink-soft);display:block;margin-bottom:1.5rem;font-weight:500}
+.interlude .q blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(2.2rem,5.2vw,4.2rem);line-height:1.2;color:#ffffff;max-width:20ch;margin:0 auto;text-shadow:0 3px 25px rgba(0,0,0,.6)}
+.interlude .q .author{display:block;font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink-rose);margin-top:1.6rem}
+
+/* ---------- CTA / Newsletter ---------- */
+.cta-sec{background:transparent;text-align:center}
+.cta-sec h2{font-family:var(--serif);font-size:clamp(2.5rem,6.2vw,5.2rem);line-height:1.05;margin:1.3rem 0}
+.cta-sec h2 em{font-style:italic;color:var(--green-main)}
+.cta-sec h2 em.pink-em{color:var(--pink-rose)}
+.cta-sec p{max-width:48ch;margin:0 auto 2.5rem;color:var(--ink-2);font-size:1.02rem}
+
+.signup{display:flex;max-width:480px;margin:0 auto;border:2px solid var(--green-main);border-radius:100px;overflow:hidden;background:#ffffff;box-shadow:0 8px 30px rgba(47,111,54,.12);transition:all .3s}
+.signup:focus-within{border-color:var(--pink-rose);box-shadow:0 8px 30px var(--pink-glow)}
+.signup input{flex:1;border:0;background:transparent;padding:1.1rem 1.5rem;font-size:.95rem;font-family:var(--sans);color:var(--ink);outline:none}
+.signup button{border:0;background:linear-gradient(135deg, var(--yellow-sun) 0%, var(--pink-rose) 100%);color:#ffffff;padding:0 2rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .35s;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+.signup button:hover{filter:brightness(1.08);box-shadow:0 4px 20px var(--pink-glow)}
+.cta-sec .fine{font-size:.68rem;letter-spacing:.05em;color:var(--stone-d);margin-top:1.2rem}
+
+/* ---------- Footer ---------- */
+footer{background:var(--green-darker);color:var(--bone-2);padding:clamp(4rem,9vh,7rem) var(--pad) 2.5rem;border-top:2px solid rgba(255,101,132,.2)}
+.frow{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+.fbrand .mk{font-family:var(--serif);font-size:1.8rem;letter-spacing:.3em;color:#fff}
+.fbrand .mk b{color:var(--yellow-sun);font-weight:400}
+.fbrand .sub-label{font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink-soft);margin-top:.7rem;display:block}
+.fcols{display:flex;gap:4.5rem;flex-wrap:wrap}
+.fcol h4{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--yellow-sun);margin-bottom:1.1rem;font-weight:600}
+.fcol a{display:block;font-size:.88rem;color:rgba(255,249,219,.75);margin-bottom:.6rem;transition:all .3s}
+.fcol a:hover{color:var(--pink-soft);transform:translateX(3px)}
+.fbot{display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;margin-top:4rem;padding-top:1.8rem;border-top:1px solid rgba(255,249,219,.12);font-size:.68rem;letter-spacing:.05em;color:var(--stone)}
+
+/* ---------- Floating Purr Widget (Sem Emojis) ---------- */
+.purr-widget{position:fixed;bottom:2rem;right:2rem;z-index:90;display:flex;align-items:center;gap:.65rem;background:linear-gradient(135deg, var(--green-dark) 0%, #1e261e 100%);border:2px solid var(--pink-rose);color:var(--yellow-soft);padding:.7rem 1.4rem;border-radius:100px;cursor:pointer;box-shadow:0 10px 30px rgba(16,36,18,.4);transition:all .35s;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:var(--sans);font-weight:600}
+.purr-widget .purr-wave-svg{transition:transform .3s ease}
+.purr-widget:hover{transform:scale(1.05);background:linear-gradient(135deg, var(--green-main) 0%, #301f28 100%);box-shadow:0 12px 35px var(--pink-glow)}
+.purr-widget.active{background:linear-gradient(135deg, var(--yellow-sun) 0%, var(--pink-rose) 100%);color:#ffffff;border-color:transparent;text-shadow:0 1px 3px rgba(0,0,0,.3);animation:pulsePurr 1.2s ease-in-out infinite}
+.purr-widget.active .purr-wave-svg{animation:soundWave 0.8s ease-in-out infinite alternate}
+@keyframes pulsePurr{0%,100%{box-shadow:0 0 15px var(--pink-glow)}50%{box-shadow:0 0 35px var(--pink-glow)}}
+@keyframes soundWave{0%{transform:scaleY(0.7)}100%{transform:scaleY(1.3)}}
+
+/* Click Light Ripple Effect */
+.click-ripple{position:fixed;width:16px;height:16px;border-radius:50%;border:2px solid var(--pink-rose);background:radial-gradient(circle, rgba(255,190,11,.4) 0%, rgba(240,98,146,.2) 60%, transparent 100%);pointer-events:none;z-index:9999;transform:translate(-50%, -50%) scale(1);animation:rippleFade .75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards}
+@keyframes rippleFade{0%{opacity:.9;transform:translate(-50%, -50%) scale(.6)}100%{opacity:0;transform:translate(-50%, -50%) scale(3.5)}}
+
+@media (prefers-reduced-motion:reduce){
+  .scrolln .ln::after{animation:none}
+  #steam{display:none}
+  .ritual{height:auto;display:block}
+  .track-wrap{flex:none;height:auto;overflow:visible}
+  .track{flex-direction:column;height:auto;gap:1.5rem;padding:1rem var(--pad) 4rem}
+  .step,.step.intro{width:100%;height:auto;min-height:50vh}
+  .step.intro{min-height:auto;padding:2rem 0}
+}
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"><div class="pi"></div></div>
+
+  <!-- Loader -->
+  <div class="loader" id="loader"><div class="lw">
+    <div class="mk serif">UNIVERSO <b>DOS GATOS</b></div>
+    <span class="lsub-top">Santuário da Serenidade Felina</span>
+    <div class="lbar"><i id="lbar"></i></div>
+    <div class="lsub" id="lsub">preparando o aconchego · 0%</div>
+  </div></div>
+
+  <!-- Floating Purr Widget -->
+  <button class="purr-widget" id="purrBtn" title="Clique para ouvir o ronrom relaxante" onclick="togglePurrSound()">
+    <svg class="purr-wave-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12h2l3-6 4 12 3-8 3 4h3"/>
+    </svg>
+    <span id="purrTxt">Ouvir Ronrom</span>
+  </button>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="brand serif">
+      UNIVERSO<b>DOS GATOS</b>
+    </div>
+    <div class="nlinks">
+      <a href="#origem">Origem &amp; História</a>
+      <a href="#anatomia">Anatomia &amp; Graça</a>
+      <a href="#ritual">O Ritual do Gato</a>
+      <a href="#personalidades">Personalidades</a>
+      <a href="#curiosidades">Curiosidades</a>
+      <a href="#clube" class="nbtn">Clube do Miau</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <div class="bg">
+      <img src="assets/hero.jpg" alt="Gatinho carismático e sereno com carinha e orelhas totalmente visíveis">
+    </div>
+    <canvas id="steam"></canvas>
+    
+    <!-- Emblema Artístico Felino com silhueta e cauda elegante (sem kanji) -->
+    <div class="hero-feline-badge" aria-label="Serenidade Felina">
+      <svg class="cat-flourish-svg" width="68" height="340" viewBox="0 0 90 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="catLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffbe0b" />
+            <stop offset="45%" stop-color="#f0a500" />
+            <stop offset="85%" stop-color="#ff6584" />
+            <stop offset="100%" stop-color="#f06292" />
+          </linearGradient>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="rgba(240, 165, 0, 0.35)"/>
+          </filter>
+        </defs>
+        <!-- Orelhas e contorno da cabeça -->
+        <path d="M28 48 L14 18 C26 22 36 32 40 45" stroke="url(#catLineGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M50 45 C54 32 64 22 76 18 L62 48" stroke="url(#catLineGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M40 45 C45 43 50 43 55 45" stroke="url(#catLineGrad)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M28 48 C22 58 24 72 32 80 C38 86 52 86 58 80 C66 72 68 58 62 48" stroke="url(#catLineGrad)" stroke-width="2" stroke-linecap="round"/>
+        <!-- Bigodinhos delicados -->
+        <path d="M12 60 Q24 64 32 66" stroke="url(#catLineGrad)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M10 70 Q23 71 33 72" stroke="url(#catLineGrad)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M78 60 Q66 64 58 66" stroke="url(#catLineGrad)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M80 70 Q67 71 57 72" stroke="url(#catLineGrad)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+        <!-- Linha da espinha fluindo para baixo -->
+        <path d="M45 86 C45 130 52 180 50 240 C48 290 40 330 36 350" stroke="url(#catLineGrad)" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Cauda suavemente encurvada para cima -->
+        <path d="M36 350 C32 375 18 395 32 405 C46 415 68 400 74 380 C80 355 64 340 50 348 C42 355 45 372 58 372" stroke="url(#catLineGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+      </svg>
+      <div class="v-caption">
+        <span class="v-word">SERENIDADE FELINA</span>
+        <span class="v-sub">ARTE DO RONROM</span>
+      </div>
+    </div>
+
+    <div class="inner">
+      <h1 class="serif"><span class="hl">A Arte do</span><span class="hl"><em>Ronrom.</em></span></h1>
+      <p class="sub">Mestres da quietude, filósofos do aconchego e acrobatas da serenidade. O universo felino em sua essência mais pura: curiosidades, a ciência da cura pelo ronrom e a sabedoria de viver o agora.</p>
+      <div class="cta">
+        <a href="#origem" class="btn solid">Explorar o Universo Felino</a>
+        <a href="#ritual" class="btn ghost">O Segredo do Ronrom</a>
+      </div>
+      <div class="scrolln"><span class="ln"></span> Role para desacelerar</div>
+    </div>
+  </header>
+
+  <!-- Manifesto -->
+  <section class="manifesto wrap">
+    <span class="eyebrow c" data-rv="">Filosofia Zen Felina</span>
+    <p class="big serif" data-rv="">Gatos não correm contra o tempo.<br>Eles nos ensinam a <em>habitar o instante.</em></p>
+    <p class="lead" data-rv="">Um gato deitado em um raio de sol é uma aula silenciosa de meditação. Cada respiração ritmada, o esticar preguiçoso das patas e a vibração curativa do ronrom são lembretes diários de que a paz reside nas coisas mais simples.</p>
+  </section>
+
+  <!-- Origem & História -->
+  <section class="wrap" id="origem">
+    <div class="split">
+      <div class="media" data-rv="">
+        <img src="assets/terroir.jpg" alt="Gato curioso e sereno explorando a natureza verdejante">
+        <span class="cap">Kyoto &amp; Egito Antigo · O Elo Milenar</span>
+      </div>
+      <div class="copy">
+        <span class="eyebrow" data-rv="">01 · Origem &amp; Mistério</span>
+        <h2 class="serif" data-rv="">Dos templos sagrados<br>ao <em>aconchego do lar.</em></h2>
+        <p data-rv="">Diferente de outras espécies, os felinos domesticaram a si mesmos há mais de 9.500 anos no Crescente Fértil. No Antigo Egito, eram reverenciados como emanações sagradas sob a proteção de Bastet, a deusa do lar, dos segredos e da harmonia.</p>
+        <p data-rv="">No Japão clássico, tornaram-se guardiões espirituais dos templos budistas, protegendo pergaminhos sagrados e inspirando o lendário Maneki Neko — o gato que acena trazendo paz, fortuna e acolhimento.</p>
+        <div class="meta" data-rv="">
+          <div><div class="k serif">9.500+</div><div class="l">anos ao lado humano</div></div>
+          <div><div class="k serif pink">20-140<em>Hz</em></div><div class="l">frequência do ronrom</div></div>
+          <div><div class="k serif">100+</div><div class="l">vocalizações e miados</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Anatomia & Graça -->
+  <section class="wrap craft" id="anatomia">
+    <div class="split rev">
+      <div class="media" data-rv="">
+        <img src="assets/mill.jpg" alt="Olhar felino expressivo com vibrissas nítidas e pelagem brilhante">
+        <span class="cap">Vibrissas &amp; Agilidade · Precisão Felina</span>
+      </div>
+      <div class="copy">
+        <span class="eyebrow pink" data-rv="">02 · Biomecânica &amp; Graça</span>
+        <h2 class="serif" data-rv="">Trinta vértebras e uma clavícula livre.<br><em>A física da perfeição.</em></h2>
+        <p data-rv="">O esqueleto felino é uma obra-prima de flexibilidade: sua clavícula flutuante permite que ele passe por qualquer espaço onde sua cabeça passe. Sua espinha elástica funciona como uma mola perfeita, permitindo saltar até seis vezes a sua própria altura com graça impecável.</p>
+        <p data-rv="">Suas vibrissas (os famosos bigodes) possuem terminações nervosas altamente sensíveis, capazes de sentir correntes de ar sutis e calcular distâncias milimétricas mesmo na escuridão total.</p>
+        <div class="microsteps" data-rv="">
+          <div><div class="n">01 · Vibrissas</div><div class="t">Radares táteis de alta precisão milimétrica</div></div>
+          <div><div class="n">02 · Audição 180°</div><div class="t">32 músculos em cada orelha para ultrassons</div></div>
+          <div class="pink-step"><div class="n pink">03 · Almofadinhas</div><div class="t">Amassar pãozinho estimula ocitocina e puro afeto</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O Ritual do Gato (Horizontal Scrub Pinned) -->
+  <section class="ritual" id="ritual">
+    <div class="head">
+      <span class="eyebrow">03 · O Ritual Diário</span>
+      <h2 class="serif">Quatro movimentos, noventa minutos de paz.</h2>
+    </div>
+    <div class="track-wrap" id="trackWrap">
+      <div class="track" id="track">
+        <div class="step intro">
+          <div class="big serif">Um dia com um gato<br>nunca é apressado.<br><em>Esse é o segredo.</em></div>
+        </div>
+        <div class="step">
+          <img src="assets/sift.jpg" alt="Gato espreguiçando-se ao sol">
+          <div class="lab">
+            <span class="s">01 · O Despertar</span>
+            <h3 class="serif">O Banho de Sol</h3>
+            <p>Rastrear o primeiro feixe de luz dourada na manhã e deitar com o corpo estendido, recarregando calor e serenidade.</p>
+          </div>
+        </div>
+        <div class="step pink-border">
+          <img src="assets/pour.jpg" alt="Aproximação carinhosa de um gato">
+          <div class="lab">
+            <span class="s pink">02 · A Carícia</span>
+            <h3 class="serif">O Queixo &amp; Bochechas</h3>
+            <p>O roçar suave das bochechas nas pernas e nos móveis, compartilhando feromônios faciais de felicidade e segurança.</p>
+          </div>
+        </div>
+        <div class="step pink-border">
+          <img src="assets/froth.jpg" alt="Gato aconchegado amassando cobertor">
+          <div class="lab">
+            <span class="s pink">03 · O Ronrom</span>
+            <h3 class="serif">Amassar Pãozinho</h3>
+            <p>Patinhas rosadas e rítmicas abrindo e fechando no cobertor macio enquanto uma vibração suave de 25 a 140 Hz preenche o ar.</p>
+          </div>
+        </div>
+        <div class="step">
+          <img src="assets/hands.jpg" alt="Conexão profunda entre humano e gato">
+          <div class="lab">
+            <span class="s">04 · A Conexão</span>
+            <h3 class="serif">O Piscar Lento</h3>
+            <p>Olhos que se fecham devagar em sintonia mútua: o famoso 'slow blink', que na linguagem felina significa amor incondicional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personalidades / Range -->
+  <section class="wrap range" id="personalidades">
+    <div class="head">
+      <span class="eyebrow c pink" data-rv="">Guia de Personalidades</span>
+      <h2 class="serif" data-rv="">Três almas felinas, <em>o mesmo encanto.</em></h2>
+    </div>
+    <div class="grades">
+      <div class="grade" data-rv="">
+        <div class="pic"><img src="assets/tin-ceremonial.jpg" alt="Gato nobre e tranquilo"></div>
+        <div class="body">
+          <span class="g">Sábio &amp; Contemplativo</span>
+          <h3 class="serif">O Filósofo Zen</h3>
+          <p>Aquele gatinho que observa o mundo do alto da estante, aprecia o silêncio e oferece um carinho sereno e reconfortante nos momentos mais necessários.</p>
+          <div class="row">
+            <span class="price">Nível Ronrom: Sublime</span>
+            <span class="add">Adotar Amor</span>
+          </div>
+        </div>
+      </div>
+      <div class="grade" data-rv="">
+        <div class="pic"><img src="assets/tin-daily.jpg" alt="Gato laranja solar e brincalhão"></div>
+        <div class="body">
+          <span class="g">Solar &amp; Radiante</span>
+          <h3 class="serif">O Raio de Sol Laranja</h3>
+          <p>Energia contagiante, coração de ouro e curiosidade sem limites. Transforma caixas de papelão em impérios mágicos e ilumina qualquer dia cinzento.</p>
+          <div class="row">
+            <span class="price">Nível Energia: Pura Luz</span>
+            <span class="add">Adotar Amor</span>
+          </div>
+        </div>
+      </div>
+      <div class="grade pink-card" data-rv="">
+        <div class="pic"><img src="assets/tin-culinary.jpg" alt="Gatinho fofo aconchegado com orelhinhas e almofadinhas rosas"></div>
+        <div class="body">
+          <span class="g pink">Doce Aconchego &amp; Almofadinha</span>
+          <h3 class="serif">O Guardião do Abraço</h3>
+          <p>Mestre em aquecer pés nos dias frios, dorme enroladinho como um caracol de pelo e ronrona pertinho do ouvido até que você adormeça em paz.</p>
+          <div class="row">
+            <span class="price pink">Nível Afeto: Infinito</span>
+            <span class="add pink-btn">Adotar Amor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curiosidades / Números (Alternando Amarelo, Verde e Rosa) -->
+  <section class="wrap numbers" id="curiosidades">
+    <div class="numgrid">
+      <div data-rv=""><div class="v serif" data-count="16">0</div><div class="l">horas de sono regenerativo por dia</div></div>
+      <div data-rv=""><div class="v serif" data-count="48"><em>~</em>0<em>km/h</em></div><div class="l">velocidade máxima em arrancadas</div></div>
+      <div data-rv=""><div class="v serif pink" data-count="140"><em></em>0<em>Hz</em></div><div class="l">frequência curativa do ronrom</div></div>
+      <div data-rv=""><div class="v serif shimmer" data-count="0">0</div><div class="l">estresse com um gato no colo</div></div>
+    </div>
+  </section>
+
+  <!-- Interlúdio -->
+  <section class="interlude">
+    <div class="bg"><img src="assets/mist-bg.jpg" alt="Gato envolto em luz suave da natureza" data-par=""></div>
+    <div class="q">
+      <span class="interlude-tag">Obra-Prima da Natureza</span>
+      <blockquote class="serif">“Até o menor dos felinos é uma obra-prima da natureza.”</blockquote>
+      <span class="author">— Leonardo da Vinci</span>
+    </div>
+  </section>
+
+  <!-- CTA / Clube do Miau -->
+  <section class="wrap cta-sec" id="clube">
+    <span class="eyebrow c pink" data-rv="">Comunidade Felina</span>
+    <h2 class="serif" data-rv="">Traga mais <em class="pink-em">ronrons</em> para o seu dia.</h2>
+    <p data-rv="">Receba cartas semanais com dicas veterinárias de bem-estar, curiosidades sobre o comportamento felino, guias de enriquecimento ambiental e histórias inspiradoras.</p>
+    <form class="signup" data-rv="" onsubmit="alert('Obrigado por se juntar ao Clube do Miau!'); return false;">
+      <input type="email" placeholder="seu-email@exemplo.com" aria-label="Email" required>
+      <button type="submit">Quero Fazer Parte</button>
+    </form>
+    <div class="fine" data-rv="">Sem spam · Dicas com base científica · Amor e respeito a todos os animais</div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="frow">
+      <div class="fbrand">
+        <div class="mk serif">UNIVERSO <b>DOS GATOS</b></div>
+        <span class="sub-label">Santuário da Serenidade &amp; Conexão Felina</span>
+      </div>
+      <div class="fcols">
+        <div class="fcol">
+          <h4>Saúde &amp; Cuidado</h4>
+          <a href="#anatomia">Nutrição Equilibrada</a>
+          <a href="#anatomia">Hidratação &amp; Fontes</a>
+          <a href="#anatomia">Enriquecimento Ambiental</a>
+          <a href="#anatomia">Consultas Preventivas</a>
+        </div>
+        <div class="fcol">
+          <h4>Comportamento</h4>
+          <a href="#origem">Linguagem da Cauda</a>
+          <a href="#ritual">O Poder do Ronrom</a>
+          <a href="#anatomia">O Efeito do Catnip</a>
+          <a href="#ritual">Gatificação da Casa</a>
+        </div>
+        <div class="fcol">
+          <h4>Adoção &amp; Apoio</h4>
+          <a href="#personalidades">Adote um Amigo</a>
+          <a href="#clube">Apoio a Protetores</a>
+          <a href="#clube">Posse Responsável</a>
+          <a href="#clube">Doe Ração e Carinho</a>
+        </div>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 O Universo dos Gatos · Dedicado a espalhar a paz, a saúde e o amor por todos os gatos do mundo.</span>
+      <span>Harmonia em Tons de Verde, Amarelo &amp; Rosa · Presença e Serenidade</span>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Loader ---- */
+  const loader=document.getElementById('loader'), lbar=document.getElementById('lbar'), lsub=document.getElementById('lsub');
+  const imgs=[...document.images]; let done=0;
+  const total=Math.max(1,imgs.length);
+  function bump(){
+    done++;
+    const p=Math.round(done/total*100);
+    if(lbar) lbar.style.width=p+'%';
+    if(lsub) lsub.textContent='preparando o aconchego · '+p+'%';
+    if(done>=total) finish();
+  }
+  let finished=false;
+  function finish(){
+    if(finished) return;
+    finished=true;
+    setTimeout(()=>{ loader.classList.add('done'); start(); }, 350);
+  }
+  imgs.forEach(im=>{ if(im.complete) bump(); else { im.addEventListener('load',bump); im.addEventListener('error',bump); } });
+  setTimeout(finish, 4000); // safety fallback
+
+  /* ---- Nav Dock ---- */
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>{ nav.classList.toggle('docked', (window.scrollY||0) > 60); }, {passive:true});
+
+  /* ---- Golden Sunlight & Pink Sakura Dust Motes Canvas ---- */
+  (function(){
+    const cv=document.getElementById('steam'); if(!cv) return; const x=cv.getContext('2d');
+    let W=0,H=0, DPR=1, parts=[], spr, running=false, raf=0, lastT=0;
+    function sprite(){
+      const s=128, c=document.createElement('canvas'); c.width=c.height=s; const g=c.getContext('2d');
+      const gr=g.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+      gr.addColorStop(0,'rgba(255,215,64,.7)'); // Golden sunlight core
+      gr.addColorStop(0.32,'rgba(255,101,132,.45)'); // Warm rose glow
+      gr.addColorStop(0.7,'rgba(95,168,85,.15)'); // Soft emerald touch
+      gr.addColorStop(1,'rgba(255,215,64,0)');
+      g.fillStyle=gr; g.fillRect(0,0,s,s); return c;
+    }
+    function size(){
+      const r=cv.getBoundingClientRect();
+      W=cv.width=Math.max(2,r.width*DPR);
+      H=cv.height=Math.max(2,r.height*DPR);
+    }
+    function seed(){
+      parts=[]; const n=Math.min(24,Math.round(W/85));
+      for(let i=0;i<n;i++) parts.push(mk());
+    }
+    function mk(){
+      return {
+        x: Math.random()*W,
+        y: H*(.4+Math.random()*.65),
+        r: (20+Math.random()*45)*DPR,
+        v: (.12+Math.random()*.3)*DPR,
+        a: 0,
+        av: .003+Math.random()*.005,
+        drift: (Math.random()-.5)*.35*DPR,
+        ph: Math.random()*6.28
+      };
+    }
+    function frame(t){
+      raf=requestAnimationFrame(frame);
+      if(!running) return;
+      if(t-lastT<33) return;
+      lastT=t;
+      x.clearRect(0,0,W,H);
+      x.globalCompositeOperation='screen';
+      for(const p of parts){
+        p.y-=p.v;
+        p.x+=p.drift+Math.sin(t*0.0004+p.ph)*0.3*DPR;
+        p.a+=p.av;
+        const life=Math.max(0,Math.min(1,Math.sin(p.a)));
+        if(p.y< H*0.12 || p.a>3.14){ Object.assign(p, mk()); continue; };
+        const s=p.r*(1+p.a*0.3);
+        x.globalAlpha=life*0.65;
+        x.drawImage(spr, p.x-s/2, p.y-s/2, s, s);
+      }
+      x.globalAlpha=1;
+    }
+    spr=sprite(); size(); seed();
+    addEventListener('resize',()=>{ size(); seed(); });
+    try{ new IntersectionObserver(es=>{ running=es[0].isIntersecting && !REDUCED; },{threshold:.02}).observe(cv); }catch(e){ running=!REDUCED; }
+    if(!REDUCED){ running=true; raf=requestAnimationFrame(frame); }
+  })();
+
+  /* ---- GSAP & Lenis Setup ---- */
+  function start(){
+    if(!window.gsap){
+      document.querySelectorAll('.rv,[data-rv]').forEach(e=>{e.style.opacity=1;e.style.transform='none';});
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = (!REDUCED && window.Lenis) ? new Lenis({lerp:0.07, smoothWheel:true, wheelMultiplier:1}) : null;
+    window.lenis = lenis;
+    if(lenis){
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t=>lenis.raf(t*1000));
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // Anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+      const id=a.getAttribute('href'); if(id.length<2) return;
+      const t=document.querySelector(id); if(!t) return;
+      e.preventDefault();
+      if(lenis) lenis.scrollTo(t,{offset:-10,duration:1.3});
+      else t.scrollIntoView({behavior:'smooth'});
+    }));
+
+    if(REDUCED){
+      gsap.utils.toArray('[data-rv]').forEach(el=>gsap.fromTo(el,{opacity:0},{opacity:1,duration:.7,ease:'power1.out',scrollTrigger:{trigger:el,start:'top 94%'}}));
+      document.querySelectorAll('[data-count]').forEach(el=>{
+        const t=+el.getAttribute('data-count'); const em=el.querySelectorAll('em');
+        if(em.length===2) el.innerHTML=em[0].outerHTML+t+em[1].outerHTML;
+        else if(em.length===1) el.innerHTML=t+em[0].outerHTML;
+        else el.textContent=t;
+      });
+      return;
+    }
+
+    // Parallax hero
+    gsap.to('.hero .bg img',{yPercent:8, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+
+    // Misty page background parallax
+    gsap.to('.page-bg .pi',{yPercent:14, ease:'none', scrollTrigger:{trigger:document.body, start:'top top', end:'bottom bottom', scrub:true}});
+
+    // Hero entrance
+    const heroTl=gsap.timeline({defaults:{ease:'power3.out'}});
+    heroTl.from('.hero h1 .hl',{y:54,opacity:0,duration:1.1,stagger:0.13})
+      .from('.hero .sub',{y:24,opacity:0,duration:.9},'-=0.65')
+      .from('.hero .cta > *',{y:18,opacity:0,duration:.75,stagger:0.1},'-=0.6')
+      .from('.scrolln',{opacity:0,y:10,duration:.7},'-=0.45')
+      .from('.hero-feline-badge',{opacity:0,y:50,duration:1.5,ease:'power2.out'},'-=1.45');
+
+    // Generic reveals
+    gsap.utils.toArray('[data-rv]').forEach(el=>{
+      gsap.fromTo(el,{opacity:0,y:50},{opacity:1,y:0,duration:1.2,ease:'power3.out',
+        scrollTrigger:{trigger:el, start:'top 88%'}});
+    });
+
+    // Image parallax inside media
+    gsap.utils.toArray('[data-par]').forEach(img=>{
+      gsap.fromTo(img,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:img.closest('section')||img, start:'top bottom', end:'bottom top', scrub:true}});
+    });
+
+    // Numbers count-up
+    gsap.utils.toArray('[data-count]').forEach(el=>{
+      const target=+el.getAttribute('data-count'); const o={v:0};
+      ScrollTrigger.create({trigger:el, start:'top 85%', once:true, onEnter:()=>{
+        gsap.to(o,{v:target,duration:1.6,ease:'power2.out',onUpdate:()=>{
+          const txt=Math.round(o.v); const em=el.querySelectorAll('em');
+          if(em.length===2){ el.innerHTML=em[0].outerHTML+txt+em[1].outerHTML; }
+          else if(em.length===1){ el.innerHTML=txt+em[0].outerHTML; }
+          else el.textContent=txt;
+        }});
+      }});
+    });
+
+    // Ritual pinned horizontal scrub
+    const track=document.getElementById('track'), wrap=document.getElementById('trackWrap');
+    if(track && wrap){
+      const dist=()=>Math.max(1, track.scrollWidth - wrap.clientWidth);
+      const sect=document.querySelector('.ritual');
+      const tl=gsap.timeline({scrollTrigger:{trigger:sect, start:'top top', end:()=>'+='+(dist()*1.18),
+        scrub:true, pin:sect, anticipatePin:1, invalidateOnRefresh:true}});
+      tl.to(track,{x:()=>-dist(), ease:'none', duration:1});
+      tl.to(track,{x:()=>-dist(), ease:'none', duration:0.18});
+    }
+
+    setTimeout(()=>ScrollTrigger.refresh(), 300);
+  }
+})();
+
+/* ---- Cat Purr Synthesizer (Web Audio API) ---- */
+let purrCtx = null;
+let purrSource = null;
+let purrGain = null;
+let isPurring = false;
+
+function togglePurrSound() {
+  const btn = document.getElementById('purrBtn');
+  const txt = document.getElementById('purrTxt');
+  if (!purrCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    purrCtx = new AudioContext();
+  }
+  if (purrCtx.state === 'suspended') {
+    purrCtx.resume();
+  }
+
+  if (isPurring) {
+    if (purrGain) {
+      purrGain.gain.linearRampToValueAtTime(0.001, purrCtx.currentTime + 0.4);
+      setTimeout(() => {
+        if (purrSource) {
+          try { purrSource.stop(); } catch(e){}
+          purrSource.disconnect();
+          purrSource = null;
+        }
+      }, 450);
+    }
+    isPurring = false;
+    if (btn) btn.classList.remove('active');
+    if (txt) txt.textContent = 'Ouvir Ronrom';
+  } else {
+    const sampleRate = purrCtx.sampleRate;
+    const bufferSize = sampleRate * 2.5;
+    const buffer = purrCtx.createBuffer(1, bufferSize, sampleRate);
+    const data = buffer.getChannelData(0);
+    let lastOut = 0.0;
+
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      // Brown noise for soft warm rumble
+      lastOut = (lastOut + (0.02 * white)) / 1.02;
+      const t = i / sampleRate;
+      // 25.5 Hz frequency of feline larynx vibration
+      const pulse = 0.5 + 0.5 * Math.sin(2 * Math.PI * 25.5 * t);
+      // Gentle breathing cadence (every ~1.8 seconds)
+      const breath = 0.7 + 0.3 * Math.sin(2 * Math.PI * 0.55 * t);
+      data[i] = lastOut * pulse * breath * 3.8;
+    }
+
+    purrSource = purrCtx.createBufferSource();
+    purrSource.buffer = buffer;
+    purrSource.loop = true;
+
+    // Filter to retain deep soothing rumbling frequencies (120 Hz)
+    const filter = purrCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(130, purrCtx.currentTime);
+
+    purrGain = purrCtx.createGain();
+    purrGain.gain.setValueAtTime(0.001, purrCtx.currentTime);
+    purrGain.gain.linearRampToValueAtTime(0.45, purrCtx.currentTime + 0.6);
+
+    purrSource.connect(filter);
+    filter.connect(purrGain);
+    purrGain.connect(purrCtx.destination);
+    purrSource.start();
+
+    isPurring = true;
+    if (btn) btn.classList.add('active');
+    if (txt) txt.textContent = 'Ronromando...';
+  }
+}
+
+/* Click Light Ripple on Page */
+document.addEventListener('click', (e) => {
+  if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
+  const ripple = document.createElement('div');
+  ripple.className = 'click-ripple';
+  ripple.style.left = e.clientX + 'px';
+  ripple.style.top = e.clientY + 'px';
+  document.body.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 800);
+});
+</script>
+</body>
+</html>
